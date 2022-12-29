@@ -1,6 +1,6 @@
 package agh.ics.oop;
 
-abstract public class AbstractMapElement implements MapElement{
+abstract public class AbstractMapElement implements MapElement {
     Vector2d position;
     int zIndex;
 
