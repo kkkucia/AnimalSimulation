@@ -13,6 +13,6 @@ public class HellMap extends AbstractWordMap {
         int newY = new Random().nextInt(topRightCorner.y() - bottomLeftCorner.y()) + bottomLeftCorner.y();
 
         animal.move(new Vector2d(newX, newY));
-        animal.loseEnergy(worldParams.energyToProcreation);
+        animal.loseEnergy(worldParams.energyLostWhileProcreation);
     }
 }

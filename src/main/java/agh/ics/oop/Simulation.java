@@ -8,13 +8,13 @@ public interface Simulation {
 
     void removeDeadAnimals();
 
-    void moveAllAnimals();
+    void rotateAndMoveAllAnimals();
 
     void grassConsumption();
 
     void animalsProcreation();
 
-    void grassGrowth();
+    void dailyGrassGrowth();
 
     Animal[] competition(List<Animal> animals);
 }

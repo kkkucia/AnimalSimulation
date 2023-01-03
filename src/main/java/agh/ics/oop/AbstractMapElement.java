@@ -1,8 +1,8 @@
 package agh.ics.oop;
 
 abstract public class AbstractMapElement implements MapElement {
-    Vector2d position;
-    int zIndex;
+    protected Vector2d position;
+    protected int zIndex;
 
     @Override
     public Vector2d getPosition() {

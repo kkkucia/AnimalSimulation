@@ -53,4 +53,19 @@ public enum Rotation {
             case Rotation315 -> new Vector2d(-1, 1);
         };
     }
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case Rotation0 -> "0";
+            case Rotation45 -> "45";
+            case Rotation90 -> "90";
+            case Rotation135 -> "135";
+            case Rotation180 -> "180";
+            case Rotation225 -> "225";
+            case Rotation270 -> "270";
+            case Rotation315 -> "315";
+        };
+    }
+
 }

@@ -1,7 +1,11 @@
 package agh.ics.oop;
 
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import static java.util.Collections.shuffle;
 
 public class GeneSequence {
     private final Rotation[] sequence;
@@ -70,7 +74,8 @@ public class GeneSequence {
         System.arraycopy(part2, 0, newSequence, part1.length, part2.length);
 
         if (params.mutationType == MutationType.Strict) {
-            return new GeneSequence(mixedSequenceStrict(newSequence), params);
+            Rotation[] newSeq = mixedSequenceStrict(newSequence);
+            return new GeneSequence(newSeq, params);
         }
         return new GeneSequence(mixedSequenceLottery(newSequence), params);
     }
@@ -83,20 +88,36 @@ public class GeneSequence {
     }
 
     private Rotation[] mixedSequenceLottery(Rotation[] sequence) {
-        for (int i = 0; i < sequence.length; i++) {
-            if (new Random().nextBoolean()) {
-                sequence[i] = randomGene();
-            }
+        int numberOfChanges = new Random().nextInt(params.maxPossibleMutationsNumber + 1 - params.minPossibleMutationsNumber) + params.minPossibleMutationsNumber;
+        ArrayList<Integer> indexes = shuffledIndexes();
+
+        for (int i = 0; i < numberOfChanges; i++) {
+            sequence[indexes.get(i)] = randomGene();
         }
         return sequence;
     }
 
     private Rotation[] mixedSequenceStrict(Rotation[] sequence) {
-        for (int i = 0; i < sequence.length; i++) {
-            int geneValue = (sequence[i].geneValue() + new Random().nextInt(2 - (-1)) + (-1)) % Rotation.numberOfGenes();
-            sequence[i] = Rotation.encryptGene(geneValue);
+        int numberOfChanges = new Random().nextInt(params.maxPossibleMutationsNumber + 1 - params.minPossibleMutationsNumber) + params.minPossibleMutationsNumber;
+        ArrayList<Integer> indexes = shuffledIndexes();
+
+        for (int i = 0; i < numberOfChanges; i++) {
+            int geneChange = new Random().nextBoolean() ? 1 : -1;
+            int geneValue = (sequence[i].geneValue() + geneChange) % Rotation.numberOfGenes();
+            sequence[indexes.get(i)] = Rotation.encryptGene(geneValue);
         }
         return sequence;
+    }
+
+    private ArrayList<Integer> shuffledIndexes() {
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        for (int i = 0; i < params.genomeLength; i++) {
+            indexes.add(i);
+        }
+        shuffle(indexes);
+
+        return indexes;
     }
 
     public Rotation[] getSequence() {

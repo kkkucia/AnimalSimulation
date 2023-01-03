@@ -1,43 +1,53 @@
 package agh.ics.oop;
 
 
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class SimulationEngine implements Simulation, DeathObserver {
 
     private List<Animal> animalCorpses;
     private final AbstractWordMap map;
     private final Grassfield grassfield;
-    WorldParameters worldParams;
-    GenomeParameters genomeParams;
-    final int ENERGY_LOST_PER_DAY = 1;
+    private final WorldParameters worldParams;
+    private final GenomeParameters genomeParams;
+    private final int ENERGY_LOST_PER_DAY = 1;
 
     public SimulationEngine(WorldParameters worldParams, GenomeParameters genomeParams) {
         this.worldParams = worldParams;
         this.genomeParams = genomeParams;
         animalCorpses = new LinkedList<>();
         grassfield = worldParams.grassfiledType == GrassfieldType.ToxicCorpses ? new ToxicCorpses(worldParams) : new ForestedEquators(worldParams);
-        map = worldParams.mapType == MapType.EarthMap ? new EarthMap(worldParams, grassfield):new HellMap(worldParams, grassfield);
+        map = worldParams.mapType == MapType.EarthMap ? new EarthMap(worldParams, grassfield) : new HellMap(worldParams, grassfield);
 
         addAnimalsToMap();
     }
 
-    private void addAnimalsToMap(){
-        for (int i = 0; i < worldParams.startQuantityOfAnimals; i++){
+    public AbstractWordMap getMap() {
+        return map;
+    }
+
+    private void addAnimalsToMap() {
+        for (int i = 0; i < worldParams.startQuantityOfAnimals; i++) {
             Vector2d startPosition = new Vector2d(new Random().nextInt(worldParams.width), new Random().nextInt(worldParams.height));
-            Animal animal = new Animal(startPosition, worldParams.startEnergy, new GeneSequence(genomeParams));
-            map.placeAnimal(animal);
+            Animal animal = new Animal(startPosition, worldParams.startEnergy, new GeneSequence(genomeParams), map);
+            addAnimalToMap(animal);
         }
+    }
+
+    private void addAnimalToMap(Animal animal) {
+        map.placeAnimal(animal);
+        animal.addObserver(map);
+        animal.addDeathObserver(this);
     }
 
     @Override
     public void animalGetsOlder() {
-        for (List<Animal> animalsOnSingleFiled : map.animalsOnMap.values()) {
-            for (Animal animal : animalsOnSingleFiled) {
-                animal.loseEnergy(ENERGY_LOST_PER_DAY);
+        for (List<Animal>[] tab : map.animalsOnMap) {
+            for (List<Animal> animalsOnSingleFiled : tab) {
+                for (Animal animal : animalsOnSingleFiled) {
+                    animal.loseEnergy(ENERGY_LOST_PER_DAY);
+                    animal.getOlder();
+                }
             }
         }
     }
@@ -56,46 +66,71 @@ public class SimulationEngine implements Simulation, DeathObserver {
     }
 
     @Override
-    public void moveAllAnimals() {
-        for (List<Animal> animalsOnSingleFiled : map.animalsOnMap.values()) {
-            for (Animal animal : animalsOnSingleFiled) {
-                Vector2d newPosition = animal.getPosition().add(animal.getGenome().getCurrentGene().vectorValue());
-                animal.move(newPosition);
-                animal.loseEnergy(worldParams.energyLossPerMove);
+    public void rotateAndMoveAllAnimals() {
+        LinkedHashMap<Animal, Vector2d> animalsMovement = new LinkedHashMap<>();
+
+        for (List<Animal>[] tab : map.getAnimalsOnMap()) {
+            for (List<Animal> animalsOnSingleFiled : tab) {
+                for (Animal animal : animalsOnSingleFiled) {
+                    animal.rotate(animal.getGenome().getCurrentGene());
+                    Vector2d newPosition = animal.getPosition().add(animal.getGenome().getCurrentGene().vectorValue());
+                    animalsMovement.put(animal, newPosition);
+                    animal.loseEnergy(worldParams.energyLossPerMove);
+                }
             }
+        }
+        for (Map.Entry<Animal, Vector2d> entry : animalsMovement.entrySet()) {
+            Animal animal = entry.getKey();
+            animal.move(entry.getValue());
         }
     }
 
     @Override
     public void grassConsumption() {
-    }
-
-    @Override
-    public void animalsProcreation() {
-        for (List<Animal> animalsOnSingleFiled : map.animalsOnMap.values()) {
-            Animal[] sortedAnimals = competition(animalsOnSingleFiled);
-            if (sortedAnimals.length >= 2) {
-                if (sortedAnimals[1].getEnergy() >= worldParams.energyFullStomach)
-                    animalBirth(sortedAnimals[0], sortedAnimals[1]);
-                sortedAnimals[0].loseEnergy(worldParams.energyToProcreation);
-                sortedAnimals[1].loseEnergy(worldParams.energyToProcreation);
+        for (List<Animal>[] tab : map.getAnimalsOnMap()) {
+            for (List<Animal> animalsOnSingleFiled : tab) {
+                Animal[] sortedAnimals = competition(animalsOnSingleFiled);
+                if (sortedAnimals.length >= 1) {
+                    Animal animal = sortedAnimals[0];
+                    if (grassfield.getGrassesOnMap().containsKey(animal.getPosition())) {
+                        animal.addEnergy(worldParams.energyFromGrass);
+                        grassfield.removeGrass(animal.getPosition());
+                    }
+                }
             }
         }
     }
 
+    @Override
+    public void animalsProcreation() {
+        for (List<Animal>[] tab : map.getAnimalsOnMap()) {
+            for (List<Animal> animalsOnSingleFiled : tab) {
+                Animal[] sortedAnimals = competition(animalsOnSingleFiled);
+                if (sortedAnimals.length >= 2) {
+                    if (sortedAnimals[1].ableToProcreate(worldParams.energyFullStomach)) {
+                        animalBirth(sortedAnimals[0], sortedAnimals[1]);
+                        sortedAnimals[0].addChild();
+                        sortedAnimals[1].addChild();
+                        sortedAnimals[0].loseEnergy(worldParams.energyLostWhileProcreation);
+                        sortedAnimals[1].loseEnergy(worldParams.energyLostWhileProcreation);
+                    }
+                }
+            }
+        }
+    }
 
     private void animalBirth(Animal strongerParent, Animal weakerParent) {
-        int lengthOfStrongerGenome = strongerParent.getEnergy() / (weakerParent.getEnergy() + strongerParent.getEnergy()) * genomeParams.genomeLength;
+        int lengthOfStrongerGenome = (int) ((strongerParent.getEnergy() / (float) (weakerParent.getEnergy() + strongerParent.getEnergy())) * genomeParams.genomeLength);
 
         GeneSequence childGenome = strongerParent.getGenome().crossBreed(weakerParent.getGenome(), lengthOfStrongerGenome);
 
-        Animal newbornAnimal = new Animal(strongerParent.getPosition(), worldParams.energyToProcreation * 2, childGenome);
-        map.placeAnimal(newbornAnimal);
+        Animal newbornAnimal = new Animal(strongerParent.getPosition(), worldParams.energyLostWhileProcreation * 2, childGenome, map);
+        addAnimalToMap(newbornAnimal);
     }
 
     @Override
-    public void grassGrowth() {
-
+    public void dailyGrassGrowth() {
+        grassfield.addGrassesToMap(worldParams.quantityGrassPerDay);
     }
 
     @Override

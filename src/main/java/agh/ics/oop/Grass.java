@@ -5,4 +5,9 @@ public class Grass extends AbstractMapElement {
         this.position = position;
         this.zIndex = 0;
     }
+
+    @Override
+    public String toString() {
+        return "*";
+    }
 }
