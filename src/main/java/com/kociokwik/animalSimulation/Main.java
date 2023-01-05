@@ -1,6 +1,7 @@
 package com.kociokwik.animalSimulation;
 
 import com.kociokwik.animalSimulation.GUI.App;
+import com.kociokwik.animalSimulation.GUI.WelcomePage;
 import com.kociokwik.animalSimulation.engine.SimulationEngine;
 import com.kociokwik.animalSimulation.map.GrassfieldType;
 import com.kociokwik.animalSimulation.map.MapType;

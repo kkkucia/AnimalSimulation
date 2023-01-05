@@ -9,82 +9,73 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="755.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.kociokwik.animalSimulation.GUI.ConfigurationPage">
+<AnchorPane prefHeight="755.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kociokwik.animalSimulation.GUI.ConfigurationPage">
     <children>
-        <Label layoutX="37.0" layoutY="68.0" text="Length of geome"/>
-        <Label layoutX="62.0" layoutY="68.0"/>
+        <Label layoutX="37.0" layoutY="68.0" text="Length of geome" />
+        <Label layoutX="62.0" layoutY="68.0" />
         <RadioButton id="behaviour" layoutX="162.0" layoutY="109.0" mnemonicParsing="false" text="Crazy">
             <toggleGroup>
-                <ToggleGroup fx:id="behaviour"/>
+                <ToggleGroup fx:id="behaviour" />
             </toggleGroup>
         </RadioButton>
-        <RadioButton id="behaviour" layoutX="247.0" layoutY="109.0" mnemonicParsing="false" text="Not crazy"
-                     toggleGroup="$behaviour"/>
-        <Label layoutX="43.0" layoutY="142.0"/>
+        <RadioButton id="behaviour" layoutX="247.0" layoutY="109.0" mnemonicParsing="false" text="Not crazy" toggleGroup="$behaviour" />
+        <Label layoutX="43.0" layoutY="142.0" />
         <RadioButton id="mutationType" layoutX="163.0" layoutY="142.0" mnemonicParsing="false" text="Lottery">
             <toggleGroup>
-                <ToggleGroup fx:id="mutationType"/>
+                <ToggleGroup fx:id="mutationType" />
             </toggleGroup>
         </RadioButton>
-        <RadioButton id="mutationType" layoutX="249.0" layoutY="142.0" mnemonicParsing="false" text="Strict"
-                     toggleGroup="$mutationType"/>
-        <Text layoutX="37.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mutation type:"/>
-        <Text layoutX="36.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Behaviour:"/>
-        <Label layoutX="37.0" layoutY="182.0" text="Minimal mutation quantity"/>
-        <Label layoutX="39.0" layoutY="220.0" text="Maximum mutation quantity"/>
-        <TextField id="genomeLength" layoutX="220.0" layoutY="64.0"/>
-        <TextField id="minPossibleMutationsNumber" layoutX="221.0" layoutY="178.0"/>
-        <TextField id="startQuantityOfGrass" layoutX="220.0" layoutY="592.0"/>
-        <Text layoutX="246.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ANIMAL GENOME"/>
-        <Text layoutX="275.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORLD"/>
-        <Label layoutX="32.0" layoutY="478.0" prefHeight="25.0" prefWidth="65.0" text="Size of map"/>
-        <TextField id="height" layoutX="315.0" layoutY="478.0" promptText="height"/>
-        <Label layoutX="291.0" layoutY="482.0" text="x"/>
-        <Label layoutX="37.0" layoutY="512.0" text="Map type:"/>
+        <RadioButton id="mutationType" layoutX="249.0" layoutY="142.0" mnemonicParsing="false" text="Strict" toggleGroup="$mutationType" />
+        <Text layoutX="37.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mutation type:" />
+        <Text layoutX="36.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Behaviour:" />
+        <Label layoutX="37.0" layoutY="182.0" text="Minimal mutation quantity" />
+        <Label layoutX="39.0" layoutY="220.0" text="Maximum mutation quantity" />
+        <TextField id="genomeLength" layoutX="220.0" layoutY="64.0" />
+        <TextField id="minPossibleMutationsNumber" layoutX="221.0" layoutY="178.0" />
+        <TextField id="startQuantityOfGrass" layoutX="220.0" layoutY="592.0" />
+        <Text layoutX="246.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ANIMAL GENOME" />
+        <Text layoutX="275.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORLD" />
+        <Label layoutX="32.0" layoutY="478.0" prefHeight="25.0" prefWidth="65.0" text="Size of map" />
+        <TextField id="height" layoutX="315.0" layoutY="478.0" promptText="height" />
+        <Label layoutX="291.0" layoutY="482.0" text="x" />
+        <Label layoutX="37.0" layoutY="512.0" text="Map type:" />
         <RadioButton id="earthMap" layoutX="155.0" layoutY="512.0" mnemonicParsing="false" text="Earth map">
             <toggleGroup>
-                <ToggleGroup fx:id="mapType"/>
+                <ToggleGroup fx:id="mapType" />
             </toggleGroup>
         </RadioButton>
-        <RadioButton id="hellMap" layoutX="294.0" layoutY="512.0" mnemonicParsing="false" text="Hell map"
-                     textAlignment="CENTER" toggleGroup="$mapType"/>
-        <Label layoutX="38.0" layoutY="554.0" text="Start quantity of animals"/>
-        <Label layoutX="33.0" layoutY="596.0" text="Start quantity of grasses"/>
-        <TextField id="startQuantityOfAnimals" layoutX="221.0" layoutY="550.0"/>
-        <Label layoutX="49.0" layoutY="416.0"/>
-        <Label layoutX="38.0" layoutY="635.0" text="Daily amount of new grass"/>
-        <TextField id="quantityGrassPerDay" layoutX="221.0" layoutY="631.0"/>
-        <RadioButton id="grassfiledType" layoutX="164.0" layoutY="673.0" mnemonicParsing="false"
-                     text="Forested equators">
+        <RadioButton id="hellMap" layoutX="294.0" layoutY="512.0" mnemonicParsing="false" text="Hell map" textAlignment="CENTER" toggleGroup="$mapType" />
+        <Label layoutX="38.0" layoutY="554.0" text="Start quantity of animals" />
+        <Label layoutX="33.0" layoutY="596.0" text="Start quantity of grasses" />
+        <TextField id="startQuantityOfAnimals" layoutX="221.0" layoutY="550.0" />
+        <Label layoutX="49.0" layoutY="416.0" />
+        <Label layoutX="38.0" layoutY="635.0" text="Daily amount of new grass" />
+        <TextField id="quantityGrassPerDay" layoutX="221.0" layoutY="631.0" />
+        <RadioButton id="grassfiledType" layoutX="164.0" layoutY="673.0" mnemonicParsing="false" text="Forested equators">
             <toggleGroup>
-                <ToggleGroup fx:id="grassfieldType"/>
+                <ToggleGroup fx:id="grassfieldType" />
             </toggleGroup>
         </RadioButton>
-        <RadioButton id="grassfiledType" layoutX="297.0" layoutY="673.0" mnemonicParsing="false" text="Toxic corpses"
-                     toggleGroup="$grassfieldType"/>
-        <Label layoutX="42.0" layoutY="673.0" text="Grassfield type:"/>
-        <Line endX="135.0" layoutX="434.0" layoutY="30.0" startX="-398.0"/>
-        <TextField id="energyLostWhileProcreation" layoutX="221.0" layoutY="314.0"/>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
-        <Text layoutX="244.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ANIMAL ENERGY"
-              wrappingWidth="117.0"/>
-        <Label layoutX="37.0" layoutY="285.0" text="Energy to full stomach"/>
-        <TextField id="energyFullStomach" layoutX="221.0" layoutY="281.0"/>
-        <TextField id="maxPossibleMutationsNumber" layoutX="221.0" layoutY="216.0"/>
-        <TextField id="energyLossPerMove" layoutX="221.0" layoutY="350.0"/>
-        <TextField id="energyFromGrass" layoutX="220.0" layoutY="383.0"/>
-        <TextField id="width" layoutX="131.0" layoutY="478.0" promptText="width"/>
-        <Label layoutX="38.0" layoutY="318.0" text="Energy lost while procreation"/>
-        <Label layoutX="40.0" layoutY="354.0" text="Energy lost per move"/>
-        <Label layoutX="40.0" layoutY="387.0" text="Energy of eaten grass"/>
-        <Line endX="135.0" layoutX="434.0" layoutY="260.0" startX="-398.0"/>
-        <Line endX="135.0" layoutX="425.0" layoutY="452.0" startX="-398.0"/>
-        <Button id="start" contentDisplay="CENTER" layoutX="218.0" layoutY="701.0" mnemonicParsing="false"
-                text="START SIMULATION!"/>
-        <TextField alignment="CENTER" layoutX="205.0" layoutY="2.0" prefHeight="25.0" prefWidth="190.0"
-                   text="SET SIMULATION PARAMETERS!"/>
-        <Label layoutX="43.0" layoutY="416.0" text="Start energy"/>
-        <TextField id="startEnergy" layoutX="220.0" layoutY="421.0"/>
+        <RadioButton id="grassfiledType" layoutX="297.0" layoutY="673.0" mnemonicParsing="false" text="Toxic corpses" toggleGroup="$grassfieldType" />
+        <Label layoutX="42.0" layoutY="673.0" text="Grassfield type:" />
+        <Line endX="135.0" layoutX="434.0" layoutY="30.0" startX="-398.0" />
+        <TextField id="energyLostWhileProcreation" layoutX="221.0" layoutY="314.0" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+        <Text layoutX="244.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ANIMAL ENERGY" wrappingWidth="117.0" />
+        <Label layoutX="37.0" layoutY="285.0" text="Energy to full stomach" />
+        <TextField id="energyFullStomach" layoutX="221.0" layoutY="281.0" />
+        <TextField id="maxPossibleMutationsNumber" layoutX="221.0" layoutY="216.0" />
+        <TextField id="energyLossPerMove" layoutX="221.0" layoutY="350.0" />
+        <TextField id="energyFromGrass" layoutX="220.0" layoutY="383.0" />
+        <TextField id="width" layoutX="131.0" layoutY="478.0" promptText="width" />
+        <Label layoutX="38.0" layoutY="318.0" text="Energy lost while procreation" />
+        <Label layoutX="40.0" layoutY="354.0" text="Energy lost per move" />
+        <Label layoutX="40.0" layoutY="387.0" text="Energy of eaten grass" />
+        <Line endX="135.0" layoutX="434.0" layoutY="260.0" startX="-398.0" />
+        <Line endX="135.0" layoutX="425.0" layoutY="452.0" startX="-398.0" />
+        <Button id="start" contentDisplay="CENTER" layoutX="218.0" layoutY="701.0" mnemonicParsing="false" onAction="#createAndStartSimulation" text="START SIMULATION!" />
+        <TextField alignment="CENTER" layoutX="205.0" layoutY="2.0" prefHeight="25.0" prefWidth="190.0" text="SET SIMULATION PARAMETERS!" />
+        <Label layoutX="43.0" layoutY="416.0" text="Start energy" />
+        <TextField id="startEnergy" layoutX="220.0" layoutY="421.0" />
     </children>
 </AnchorPane>
