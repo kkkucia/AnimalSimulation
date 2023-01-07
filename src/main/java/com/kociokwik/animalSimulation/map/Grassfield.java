@@ -31,6 +31,7 @@ abstract public class Grassfield implements WorldGrassfiled {
                 lotteryCoordinates.add(new Vector2d(x, y));
             }
         }
+        System.out.println(lotteryCoordinates.size());
     }
 
     public void removeGrass(Vector2d position) {
@@ -42,7 +43,7 @@ abstract public class Grassfield implements WorldGrassfiled {
         List<Vector2d> currentGrassCoordinates = grassCoordinates(quantityOfGrass);
         for (Vector2d field : currentGrassCoordinates) {
             grassesOnMap.put(field, new Grass(field));
-            lotteryCoordinates.remove(field);
+            //lotteryCoordinates.remove(field);
         }
     }
 
@@ -57,7 +58,6 @@ abstract public class Grassfield implements WorldGrassfiled {
             readyCoordinates.add(lotteryCoordinates.get(idx));
             lotteryRange -= grassesMapPercent.get(lotteryCoordinates.get(idx));
             lotteryCoordinates.remove(idx);
-            maxGrassQuantity -= 1;
         }
         return readyCoordinates;
     }

@@ -12,4 +12,9 @@ public class Grass extends AbstractMapElement {
     public String toString() {
         return "*";
     }
+
+    @Override
+    public String getPicture() {
+        return "src/main/resources/images/grass.png";
+    }
 }

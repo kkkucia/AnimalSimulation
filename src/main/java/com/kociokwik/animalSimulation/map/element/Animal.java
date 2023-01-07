@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class Animal extends AbstractMapElement {
     private final GeneSequence genome;
+
     private Rotation currentRotation;
     private int age;
     private int kidsQuantity;
@@ -105,5 +106,15 @@ public class Animal extends AbstractMapElement {
     @Override
     public String toString() {
         return currentRotation.toString();
+    }
+
+    @Override
+    public String getPicture() {
+        return "src/main/resources/images/cat.png";
+    }
+
+
+    public Rotation getCurrentRotation() {
+        return currentRotation;
     }
 }

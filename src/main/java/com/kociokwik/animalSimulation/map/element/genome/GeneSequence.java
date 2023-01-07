@@ -126,6 +126,6 @@ public class GeneSequence {
     }
 
     public Rotation getCurrentGene() {
-        return sequence[currentGeneIndex];
+        return sequence[currentGeneIndex % sequence.length];
     }
 }

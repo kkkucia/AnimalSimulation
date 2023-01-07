@@ -19,7 +19,7 @@ public class App extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(css);
         primaryStage.setScene(scene);
-        primaryStage.setX((( Screen.getPrimary().getVisualBounds().getWidth() - 600) / 2));
+        primaryStage.setX(((Screen.getPrimary().getVisualBounds().getWidth() - 600) / 2));
         primaryStage.setY(0);
 
         primaryStage.show();

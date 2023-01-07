@@ -6,4 +6,6 @@ public interface MapElement {
     Vector2d getPosition();
 
     int getZIndex();
+
+    String getPicture();
 }

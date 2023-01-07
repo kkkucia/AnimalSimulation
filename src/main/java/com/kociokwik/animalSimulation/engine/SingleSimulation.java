@@ -8,11 +8,7 @@ public class SingleSimulation {
 
     public SingleSimulation(SimulationEngine simulationEngine) {
         this.simulationEngine = simulationEngine;
-        Application.launch(SimulationPage.class);
-
-        for (int i = 0; i < 10; i++){
-
-        }
+        //Application.launch(SimulationPage.class);
     }
 
     private static void day(SimulationEngine simulation) {
@@ -22,5 +18,9 @@ public class SingleSimulation {
         simulation.animalsProcreation();
         simulation.dailyGrassGrowth();
         simulation.animalGetsOlder();
+    }
+
+    public SimulationEngine getSimulationEngine() {
+        return simulationEngine;
     }
 }

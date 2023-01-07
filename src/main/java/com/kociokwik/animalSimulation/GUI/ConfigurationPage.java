@@ -2,13 +2,11 @@ package com.kociokwik.animalSimulation.GUI;
 
 import com.kociokwik.animalSimulation.engine.SimulationEngine;
 import com.kociokwik.animalSimulation.engine.SingleSimulation;
-import com.kociokwik.animalSimulation.map.Grassfield;
 import com.kociokwik.animalSimulation.map.GrassfieldType;
 import com.kociokwik.animalSimulation.map.MapType;
 import com.kociokwik.animalSimulation.map.element.genome.MutationType;
 import com.kociokwik.animalSimulation.settings.*;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -17,17 +15,16 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Optional;
 
 
 public class ConfigurationPage {
     String css = this.getClass().getClassLoader().getResource("style.css").toExternalForm();
     WorldParameters worldParameters;
     GenomeParameters genomeParameters;
-    int behaviour = 100;
-    MutationType mutationType = MutationType.Strict;
     GrassfieldType grassfieldType = GrassfieldType.ForestedEquators;
+    MutationType mutationType = MutationType.Strict;
     MapType mapType = MapType.EarthMap;
+    int behaviour = 100;
 
     public void createAndStartSimulation(ActionEvent event) {
         Scene scene = ((Node) event.getSource()).getScene();
@@ -35,27 +32,31 @@ public class ConfigurationPage {
             worldParameters = getWorldParameters(scene);
             genomeParameters = getGenomeParameters(scene);
             SimulationEngine engine = new SimulationEngine(worldParameters, genomeParameters);
-            new SingleSimulation(engine);
-            //createSimulationPage();
+
+            createSimulationPage(new SingleSimulation(engine));
         } catch (
                 WrongParameterException exception) {
-                System.out.println(exception.getFieldName());
-                TextField errorText = (TextField) scene.lookup("#error");
-                errorText.setText("Wrong value of parameter: " + exception.getFieldName());
+            TextField errorText = (TextField) scene.lookup("#error");
+            errorText.setText("Wrong value of parameter: " + exception.getFieldName());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-//    public void createSimulationPage() throws IOException {
-//        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("simulationPage.fxml"));
-//        Parent root = loader.load();
-//        Stage stage = new Stage();
-//
-//        Scene scene = new Scene(root);
-//        scene.getStylesheets().add(css);
-//
-//        stage.setScene(scene);
-//        stage.show();
-//    }
+    public void createSimulationPage(SingleSimulation simulation) throws IOException, InterruptedException {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("simulationPage.fxml"));
+        Stage stage = new Stage();
+        SimulationPage controller = new SimulationPage(simulation, stage);
+        loader.setController(controller);
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        String simulationCss = this.getClass().getClassLoader().getResource("styleSimulation.css").toExternalForm();
+        scene.getStylesheets().add(simulationCss);
+        stage.setScene(scene);
+        stage.show();
+        controller.run();
+    }
 
     private WorldParameters getWorldParameters(Scene scene) {
         return new WordParametersBuilder()
@@ -93,7 +94,6 @@ public class ConfigurationPage {
     }
 
     public void behaviourAction(ActionEvent action) {
-        //System.out.println("Toggled: " + ((RadioButton)action.getSource()).getText());
         behaviour = ((RadioButton) action.getSource()).getText().equals("Crazy") ? 20 : 100;
     }
 
@@ -102,7 +102,6 @@ public class ConfigurationPage {
     }
 
     public void mapTypeAction(ActionEvent action) {
-        //System.out.println(((RadioButton)action.getSource()).getText().equals("Earth map"));
         mapType = ((RadioButton) action.getSource()).getText().equals("Earth map") ? MapType.EarthMap : MapType.HellMap;
     }
 

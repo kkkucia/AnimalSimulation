@@ -14,6 +14,7 @@ public class SimulationEngine implements Simulation, DeathObserver {
 
     private List<Animal> animalCorpses;
     private final AbstractWordMap map;
+
     private final Grassfield grassfield;
     private final WorldParameters worldParams;
     private final GenomeParameters genomeParams;
@@ -160,4 +161,7 @@ public class SimulationEngine implements Simulation, DeathObserver {
         return animals.toArray(Animal[]::new);
     }
 
+    public Grassfield getGrassfield() {
+        return grassfield;
+    }
 }

@@ -10,9 +10,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class WelcomePage {
-    public WelcomePage(){
-        System.out.println("Helooo");
-    }
 
     public void startSettingParams(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("configurationPage.fxml"));
@@ -22,9 +19,8 @@ public class WelcomePage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         Scene scene = new Scene(root);
-        Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.setTitle("Configuration params");
         primaryStage.setScene(scene);
         primaryStage.show();
