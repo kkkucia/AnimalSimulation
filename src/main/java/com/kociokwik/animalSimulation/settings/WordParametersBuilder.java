@@ -18,48 +18,48 @@ public class WordParametersBuilder {
     public Integer energyFromGrass;
 
     public WorldParameters build() {
-        if (width == null) {
+        if (width == null || width < 0) {
             throw new WrongParameterException("width");
         }
-        if (height == null) {
+        if (height == null || height < 0) {
             throw new WrongParameterException("height");
         }
         if (mapType == null) {
             throw new WrongParameterException("mapType");
         }
-        if (startQuantityOfAnimals == null) {
+        if (startQuantityOfAnimals == null || startQuantityOfAnimals < 0) {
             throw new WrongParameterException("startQuantityOfAnimals");
         }
-        if (startQuantityOfGrass == null) {
+        if (startQuantityOfGrass == null || startQuantityOfGrass < 0) {
             throw new WrongParameterException("startQuantityOfGrass");
         }
-        if (quantityGrassPerDay == null) {
+        if (quantityGrassPerDay == null || quantityGrassPerDay < 0) {
             throw new WrongParameterException("quantityGrassPerDay");
         }
         if (grassfiledType == null) {
             throw new WrongParameterException("grassfiledType");
         }
-        if (startEnergy == null) {
+        if (startEnergy == null || startEnergy < 0) {
             throw new WrongParameterException("startEnergy");
         }
-        if (energyFullStomach == null) {
-            throw new WrongParameterException("energyFullStomach");
+        if (energyFullStomach == null || energyFullStomach < 0) {
+            throw new WrongParameterException("Energy to full stomach");
         }
-        if (energyLostWhileProcreation == null) {
+        if (energyLostWhileProcreation == null || energyLostWhileProcreation < 0) {
             throw new WrongParameterException("energyLostWhileProcreation");
         }
-        if (energyFromGrass == null) {
+        if (energyFromGrass == null || energyFromGrass < 0) {
             throw new WrongParameterException("energyFromGrass");
         }
         return new WorldParameters(width, height, mapType, startQuantityOfAnimals, startQuantityOfGrass, quantityGrassPerDay, grassfiledType, startEnergy, energyFullStomach, energyLostWhileProcreation, energyLossPerMove, energyFromGrass);
     }
 
-    public WordParametersBuilder setWidth(int width) {
+    public WordParametersBuilder setWidth(Integer width) {
         this.width = width;
         return this;
     }
 
-    public WordParametersBuilder setHeight(int height) {
+    public WordParametersBuilder setHeight(Integer height) {
         this.height = height;
         return this;
     }
@@ -69,17 +69,17 @@ public class WordParametersBuilder {
         return this;
     }
 
-    public WordParametersBuilder setStartQuantityOfAnimals(int startQuantityOfAnimals) {
+    public WordParametersBuilder setStartQuantityOfAnimals(Integer startQuantityOfAnimals) {
         this.startQuantityOfAnimals = startQuantityOfAnimals;
         return this;
     }
 
-    public WordParametersBuilder setStartQuantityOfGrass(int startQuantityOfGrass) {
+    public WordParametersBuilder setStartQuantityOfGrass(Integer startQuantityOfGrass) {
         this.startQuantityOfGrass = startQuantityOfGrass;
         return this;
     }
 
-    public WordParametersBuilder setQuantityGrassPerDay(int quantityGrassPerDay) {
+    public WordParametersBuilder setQuantityGrassPerDay(Integer quantityGrassPerDay) {
         this.quantityGrassPerDay = quantityGrassPerDay;
         return this;
     }
@@ -89,27 +89,27 @@ public class WordParametersBuilder {
         return this;
     }
 
-    public WordParametersBuilder setStartEnergy(int startEnergy) {
+    public WordParametersBuilder setStartEnergy(Integer startEnergy) {
         this.startEnergy = startEnergy;
         return this;
     }
 
-    public WordParametersBuilder setEnergyFullStomach(int energyFullStomach) {
+    public WordParametersBuilder setEnergyFullStomach(Integer  energyFullStomach) {
         this.energyFullStomach = energyFullStomach;
         return this;
     }
 
-    public WordParametersBuilder setEnergyLostWhileProcreation(int energyLostWhileProcreation) {
+    public WordParametersBuilder setEnergyLostWhileProcreation(Integer energyLostWhileProcreation) {
         this.energyLostWhileProcreation = energyLostWhileProcreation;
         return this;
     }
 
-    public WordParametersBuilder setEnergyLossPerMove(int energyLossPerMove) {
+    public WordParametersBuilder setEnergyLossPerMove(Integer energyLossPerMove) {
         this.energyLossPerMove = energyLossPerMove;
         return this;
     }
 
-    public WordParametersBuilder setEnergyFromGrass(int energyFromGrass) {
+    public WordParametersBuilder setEnergyFromGrass(Integer energyFromGrass) {
         this.energyFromGrass = energyFromGrass;
         return this;
     }

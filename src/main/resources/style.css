@@ -21,7 +21,7 @@ AnchorPane {
             #EECDA3 0%,
             #EF629F 50%
     );
-    -fx-background-image: url('bcg.png');
+    -fx-background-image: url('images/bcg.png');
 }
 
 TextField{
@@ -36,4 +36,8 @@ Button{
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
     -fx-background-color: black;
     -fx-text-fill: white;
+}
+
+#error{
+    -fx-text-fill: red;
 }

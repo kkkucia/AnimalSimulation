@@ -10,30 +10,30 @@ public class GenomeParametersBuilder {
     private Integer maxPossibleMutationsNumber;
 
     public GenomeParameters build() {
-        if (genomeLength == null) {
-            throw new WrongParameterException("genomeLength");
+        if (genomeLength == null || genomeLength < 0) {
+            throw new WrongParameterException("Length of geome");
         }
-        if (behaviourPercent == null) {
-            throw new WrongParameterException("behaviourPercent");
+        if (behaviourPercent == null || behaviourPercent < 0) {
+            throw new WrongParameterException("Behaviour");
         }
         if (mutationType == null) {
-            throw new WrongParameterException("genomeLength");
+            throw new WrongParameterException("Mutation type");
         }
-        if (minPossibleMutationsNumber == null) {
-            throw new WrongParameterException("genomeLength");
+        if (minPossibleMutationsNumber == null || minPossibleMutationsNumber < 0) {
+            throw new WrongParameterException("Minimal mutation quantity");
         }
-        if (maxPossibleMutationsNumber == null) {
-            throw new WrongParameterException("genomeLength");
+        if (maxPossibleMutationsNumber == null || maxPossibleMutationsNumber < 0) {
+            throw new WrongParameterException("Maximum mutation quantity");
         }
         return new GenomeParameters(genomeLength, behaviourPercent, mutationType, minPossibleMutationsNumber, maxPossibleMutationsNumber);
     }
 
-    public GenomeParametersBuilder setGenomeLength(int genomeLength) {
+    public GenomeParametersBuilder setGenomeLength(Integer genomeLength) {
         this.genomeLength = genomeLength;
         return this;
     }
 
-    public GenomeParametersBuilder setBehaviourPercent(int behaviourPercent) {
+    public GenomeParametersBuilder setBehaviourPercent(Integer behaviourPercent) {
         this.behaviourPercent = behaviourPercent;
         return this;
     }
@@ -43,12 +43,12 @@ public class GenomeParametersBuilder {
         return this;
     }
 
-    public GenomeParametersBuilder setMinPossibleMutationsNumber(int minPossibleMutationsNumber) {
+    public GenomeParametersBuilder setMinPossibleMutationsNumber(Integer minPossibleMutationsNumber) {
         this.minPossibleMutationsNumber = minPossibleMutationsNumber;
         return this;
     }
 
-    public GenomeParametersBuilder setMaxPossibleMutationsNumber(int maxPossibleMutationsNumber) {
+    public GenomeParametersBuilder setMaxPossibleMutationsNumber(Integer maxPossibleMutationsNumber) {
         this.maxPossibleMutationsNumber = maxPossibleMutationsNumber;
         return this;
     }

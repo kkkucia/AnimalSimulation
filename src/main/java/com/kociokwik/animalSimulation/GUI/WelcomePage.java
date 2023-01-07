@@ -5,12 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class WelcomePage {
+    public WelcomePage(){
+        System.out.println("Helooo");
+    }
+
     public void startSettingParams(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("configurationPage.fxml"));
         Parent root;
@@ -25,8 +28,5 @@ public class WelcomePage {
         primaryStage.setTitle("Configuration params");
         primaryStage.setScene(scene);
         primaryStage.show();
-
-//        Button button = (Button) scene.lookup("#start");
-//        button.setOnAction(event -> createAndStartSimulation(scene));
     }
 }
