@@ -13,8 +13,8 @@ public class ToxicCorpses extends Grassfield implements DeathObserver {
     }
 
     private void setPercentsOfGrassChance() {
-        for (int y = bottomLeftCorner.y(); y < topRightCorner.y(); y++) {
-            for (int x = bottomLeftCorner.x(); x < topRightCorner.x(); x++) {
+        for (int y = bottomLeftCorner.y(); y <= topRightCorner.y(); y++) {
+            for (int x = bottomLeftCorner.x(); x <= topRightCorner.x(); x++) {
                 grassesMapPercent.put(new Vector2d(x, y), 80);
             }
         }

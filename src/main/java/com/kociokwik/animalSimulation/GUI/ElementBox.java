@@ -42,7 +42,7 @@ public class ElementBox {
 
     private String lifeBarColor(int energy) {
         int energyIndicator = energy * 100;
-        String color = "-fx-text-fill: #000000; -fx-background-color:  #ff044f";
+        String color = "-fx-text-fill: #ffffff; -fx-background-color:  #000000";
         if (energyIndicator >= 100 * fullEnergy) {
             color = "-fx-text-fill: #000000; -fx-background-color:  #60e10a";
         } else if (energyIndicator >= 75 * fullEnergy) {
@@ -51,6 +51,8 @@ public class ElementBox {
             color = "-fx-text-fill: #000000; -fx-background-color:  #a1ff3c";
         } else if (energyIndicator >= 25 * fullEnergy) {
             color = "-fx-text-fill: #000000; -fx-background-color:  #ff9e1d";
+        } else if (energyIndicator >= fullEnergy) {
+            color = "-fx-text-fill: #000000; -fx-background-color:  #ff044f";
         }
         return color;
     }

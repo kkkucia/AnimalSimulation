@@ -16,8 +16,9 @@ public class WorldParameters {
     public int energyLostWhileProcreation;
     public int energyLossPerMove;
     public int energyFromGrass;
+    public int dayDurance;
 
-    public WorldParameters(int width, int height, MapType mapType, int startQuantityOfAnimals, int startQuantityOfGrass, int quantityGrassPerDay, GrassfieldType grassfiledType, int startEnergy, int energyFullStomach, int energyLostWhileProcreation, int energyLossPerMove, int energyFromGrass) {
+    public WorldParameters(int width, int height, MapType mapType, int startQuantityOfAnimals, int startQuantityOfGrass, int quantityGrassPerDay, GrassfieldType grassfiledType, int startEnergy, int energyFullStomach, int energyLostWhileProcreation, int energyLossPerMove, int energyFromGrass, int dayDurance) {
         this.width = width;
         this.height = height;
         this.mapType = mapType;
@@ -30,5 +31,6 @@ public class WorldParameters {
         this.energyLostWhileProcreation = energyLostWhileProcreation;
         this.energyLossPerMove = energyLossPerMove;
         this.energyFromGrass = energyFromGrass;
+        this.dayDurance = dayDurance;
     }
 }

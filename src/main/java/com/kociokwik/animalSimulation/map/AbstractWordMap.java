@@ -1,7 +1,6 @@
 package com.kociokwik.animalSimulation.map;
 
 import com.kociokwik.animalSimulation.map.element.Animal;
-import com.kociokwik.animalSimulation.map.element.MapElement;
 import com.kociokwik.animalSimulation.settings.PositionChangeObserver;
 import com.kociokwik.animalSimulation.settings.Vector2d;
 import com.kociokwik.animalSimulation.settings.WorldParameters;

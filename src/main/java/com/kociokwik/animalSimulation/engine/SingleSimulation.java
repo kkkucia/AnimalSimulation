@@ -8,7 +8,7 @@ public class SingleSimulation {
         this.simulationEngine = simulationEngine;
     }
 
-    private static void day(SimulationEngine simulation) {
+    public void day(SimulationEngine simulation) {
         simulation.removeDeadAnimals();
         simulation.rotateAndMoveAllAnimals();
         simulation.grassConsumption();

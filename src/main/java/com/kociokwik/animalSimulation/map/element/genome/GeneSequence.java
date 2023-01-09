@@ -78,6 +78,7 @@ public class GeneSequence {
             Rotation[] newSeq = mixedSequenceStrict(newSequence);
             return new GeneSequence(newSeq, params);
         }
+
         return new GeneSequence(mixedSequenceLottery(newSequence), params);
     }
 
@@ -105,14 +106,13 @@ public class GeneSequence {
         for (int i = 0; i < numberOfChanges; i++) {
             int geneChange = new Random().nextBoolean() ? 1 : -1;
             int geneValue = (sequence[i].geneValue() + geneChange) % Rotation.numberOfGenes();
-            sequence[indexes.get(i)] = Rotation.encryptGene(geneValue);
+            sequence[indexes.get(i)] = geneValue < 0 ? Rotation.encryptGene(7) : Rotation.encryptGene(geneValue);
         }
         return sequence;
     }
 
     private ArrayList<Integer> shuffledIndexes() {
         ArrayList<Integer> indexes = new ArrayList<>();
-
         for (int i = 0; i < params.genomeLength; i++) {
             indexes.add(i);
         }
@@ -127,5 +127,10 @@ public class GeneSequence {
 
     public Rotation getCurrentGene() {
         return sequence[currentGeneIndex % sequence.length];
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(sequence);
     }
 }

@@ -12,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -74,6 +73,7 @@ public class ConfigurationPage {
                 .setEnergyLostWhileProcreation(getIntegerFromField((TextField) scene.lookup("#energyLostWhileProcreation")))
                 .setEnergyLossPerMove(getIntegerFromField((TextField) scene.lookup("#energyLossPerMove")))
                 .setEnergyFromGrass(getIntegerFromField((TextField) scene.lookup("#energyFromGrass")))
+                .setDayDurance(getIntegerFromField((TextField) scene.lookup("#dayDurance")))
                 .build();
     }
 

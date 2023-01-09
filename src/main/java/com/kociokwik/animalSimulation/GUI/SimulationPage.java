@@ -4,19 +4,23 @@ import com.kociokwik.animalSimulation.engine.SimulationEngine;
 import com.kociokwik.animalSimulation.engine.SingleSimulation;
 import com.kociokwik.animalSimulation.map.element.Animal;
 import com.kociokwik.animalSimulation.map.element.Grass;
+import com.kociokwik.animalSimulation.map.element.genome.Rotation;
 import com.kociokwik.animalSimulation.settings.Vector2d;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,18 +28,27 @@ public class SimulationPage implements Runnable {
     SingleSimulation simulation;
     Stage stage;
     private GridPane grid;
-    final int IMG_SIZE;
-    final int SIZE;
+    final int IMG_SIZE = 32;
+    final int SIZE = 52;
 
     private int i = 0;
-    Timeline timeline;
+    Timeline timeline = null;
+    Animal animalToPrint = null;
+    private List<VBox> domainGenomeAnimals = new LinkedList<VBox>();
 
     public SimulationPage(SingleSimulation simulation, Stage stage) {
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                if(timeline != null){
+                    timeline.stop();
+                }
+            }
+        });
+
         this.simulation = simulation;
         this.stage = stage;
-        IMG_SIZE = 32;
-        SIZE = 52;
-        System.out.println(simulation.getSimulationEngine().getMap().toString());
+        //System.out.println(simulation.getSimulationEngine().getMap().toString());
     }
 
     @Override
@@ -56,20 +69,21 @@ public class SimulationPage implements Runnable {
             setStatistics();
             label.setText("Day 0");
 
-            timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+            timeline = new Timeline(new KeyFrame(Duration.seconds(simulation.getSimulationEngine().getWorldParams().dayDurance), event -> {
                 i += 1;
                 label.setText("Day " + i);
-                day(simulation.getSimulationEngine());
+                simulation.day(simulation.getSimulationEngine());
 
                 try {
                     setView();
                     setStatistics();
+                    setAnimalStatsView();
 
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-
             }));
+
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
 
@@ -82,9 +96,31 @@ public class SimulationPage implements Runnable {
         }
     }
 
+    private void setAnimalStatsView() {
+        if (animalToPrint != null) {
+            String age = animalToPrint.isAlive() ? ("Age: " + animalToPrint.getAge() + " days") : ("Age when died: " + animalToPrint.getAge() + " days");
+            TextArea stats = (TextArea) stage.getScene().lookup("#animalStats");
+            stats.setText("Position: " + animalToPrint.getPosition() + "\n" +
+                    "Genome: " + animalToPrint.getGenome() + "\n" +
+                    "Gene active: " + animalToPrint.getGenome().getCurrentGene() + "\n" +
+                    "Energy: " + animalToPrint.getEnergy() + "\n" +
+                    "Kids: " + animalToPrint.getKidsQuantity() + "\n" +
+                    age + "\n" +
+                    "Eaten grass: " + animalToPrint.getEatenGrassQuantity() + "\n");
+        }
+    }
+
     public void pauseApp() {
         if (timeline.getStatus() == Animation.Status.RUNNING) {
             timeline.pause();
+            for (VBox element : domainGenomeAnimals) {
+                element.setStyle("-fx-padding: 2 5 2 5;" +
+                        "-fx-border-style: solid inside;" +
+                        "-fx-border-width: 3;" +
+                        "-fx-border-insets: 5;" +
+                        "-fx-border-radius: 5;" +
+                        "-fx-border-color: black;");
+            }
         }
     }
 
@@ -100,28 +136,16 @@ public class SimulationPage implements Runnable {
         (stage.getScene().lookup("#pause")).setVisible(false);
     }
 
-//    private void setStatistics() {
-////        najpopularniejszych genotypów,
-////        średniej liczby dzieci dla żyjących zwierząt (wartość uwzględnia wszystkie powstałe zwierzęta, a nie tylko zwierzęta powstałe w danej epoce).
-//        TextArea stats = (TextArea) stage.getScene().lookup("#stats");
-//        stats.setText("Quantity of animals: " + simulation.getSimulationEngine().getMap().getQuantityOfAnimalsOnMap() + "\n" +
-//                "Quantity of plants: " + simulation.getSimulationEngine().getGrassfield().getGrassesOnMap().size() + "\n" +
-//                "Quantity of dead animals: " + simulation.getSimulationEngine().getCountOfDeads() + "\n" +
-//                "Average age of animals: " + simulation.getSimulationEngine().getAverageAnimalAgeWhenDied() + "\n" +
-//                "Average energy of animals: " + averageEnergyOfAnimals() + "\n" +
-//                "Quantity of free fields: " + numberOfFreeFields());
-//    }
-
     private void setStatistics() {
-//        najpopularniejszych genotypów,
-//        średniej liczby dzieci dla żyjących zwierząt (wartość uwzględnia wszystkie powstałe zwierzęta, a nie tylko zwierzęta powstałe w danej epoce).
         TextArea stats = (TextArea) stage.getScene().lookup("#stats");
         stats.setText("Quantity of animals: " + simulation.getSimulationEngine().getQuantityOfAnimalsOnMap() + "\n" +
                 "Quantity of plants: " + simulation.getSimulationEngine().getGrassfield().getGrassesOnMap().size() + "\n" +
                 "Quantity of dead animals: " + simulation.getSimulationEngine().getCountOfDeads() + "\n" +
-                "Average age of animals: " + simulation.getSimulationEngine().getAverageAnimalAgeWhenDied() + "\n" +
-                "Average energy of animals: " + averageEnergyOfAnimals() + "\n" +
-                "Quantity of free fields: " + numberOfFreeFields());
+                "Average age of animals: " + Math.round(simulation.getSimulationEngine().averageAnimalAgeWhenDied() * 100.0) / 100.0 + "\n" +
+                "Average energy of animals: " + Math.round(averageEnergyOfAnimals() * 100.0) / 100.0 + "\n" +
+                "Average quantity kids of animals: " + Math.round(simulation.getSimulationEngine().averageQuantityKidsOfAnimals() * 100.0) / 100.0 + "\n" +
+                "Quantity of free fields: " + numberOfFreeFields() + "\n" +
+                "Dominant gene: " + simulation.getSimulationEngine().dominateGene().toString());
     }
 
     private double averageEnergyOfAnimals() {
@@ -134,13 +158,11 @@ public class SimulationPage implements Runnable {
                 }
             }
         }
-
-        return sum / simulation.getSimulationEngine().getQuantityOfAnimalsOnMap();
+        return simulation.getSimulationEngine().getQuantityOfAnimalsOnMap() == 0 ? 0 : sum / simulation.getSimulationEngine().getQuantityOfAnimalsOnMap();
     }
 
     private int numberOfFreeFields() {
         int num = 0;
-
         for (int y = 0; y <= simulation.getSimulationEngine().getMap().getTopRightCorner().y(); y++) {
             for (int x = 0; x <= simulation.getSimulationEngine().getMap().getTopRightCorner().x(); x++) {
                 Vector2d position = new Vector2d(x, y);
@@ -150,7 +172,6 @@ public class SimulationPage implements Runnable {
                 }
             }
         }
-
         return num;
     }
 
@@ -193,6 +214,7 @@ public class SimulationPage implements Runnable {
             GridPane.setHalignment(element, HPos.CENTER);
         }
 
+        domainGenomeAnimals = new LinkedList<VBox>();
         for (List<Animal>[] tab : animalsOnMap) {
             for (List<Animal> animalsOnSingleFiled : tab) {
                 if (animalsOnSingleFiled.size() > 0) {
@@ -201,17 +223,29 @@ public class SimulationPage implements Runnable {
                     Vector2d position = el.getPosition();
                     grid.add(element, position.x() - leftBottomCorner.x() + 1, rightTopCorner.y() - position.y() + 1);
                     GridPane.setHalignment(element, HPos.CENTER);
+                    element.setOnMouseClicked((e) ->
+                    {
+                        animalClick(el);
+                    });
+                    checkGeneDomain(el, element);
                 }
             }
         }
     }
 
-    private static void day(SimulationEngine simulation) {
-        simulation.removeDeadAnimals();
-        simulation.rotateAndMoveAllAnimals();
-        simulation.grassConsumption();
-        simulation.animalsProcreation();
-        simulation.dailyGrassGrowth();
-        simulation.animalGetsOlder();
+    private void checkGeneDomain(Animal animal, VBox element) {
+        for (Rotation gene : animal.getGenome().getSequence()) {
+            if (gene.equals(simulation.getSimulationEngine().dominateGene())) {
+                domainGenomeAnimals.add(element);
+                break;
+            }
+        }
+    }
+
+    private void animalClick(Animal animal) {
+        if (timeline.getStatus() == Animation.Status.PAUSED) {
+            animalToPrint = animal;
+            setAnimalStatsView();
+        }
     }
 }

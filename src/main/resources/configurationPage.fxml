@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="799.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kociokwik.animalSimulation.GUI.ConfigurationPage">
+<AnchorPane prefHeight="833.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kociokwik.animalSimulation.GUI.ConfigurationPage">
     <children>
         <Label layoutX="37.0" layoutY="68.0" text="Length of geome" />
         <Label layoutX="62.0" layoutY="68.0" />
@@ -73,11 +73,13 @@
         <Label layoutX="40.0" layoutY="387.0" text="Energy of eaten grass" />
         <Line endX="135.0" layoutX="434.0" layoutY="260.0" startX="-398.0" />
         <Line endX="135.0" layoutX="425.0" layoutY="452.0" startX="-398.0" />
-        <Button id="start" contentDisplay="CENTER" layoutX="233.0" layoutY="707.0" mnemonicParsing="false" onAction="#createAndStartSimulation" text="START SIMULATION!" />
+        <Button id="start" contentDisplay="CENTER" layoutX="237.0" layoutY="754.0" mnemonicParsing="false" onAction="#createAndStartSimulation" text="START SIMULATION!" />
         <TextField alignment="CENTER" layoutX="205.0" layoutY="2.0" prefHeight="25.0" prefWidth="190.0" text="SET SIMULATION PARAMETERS!" />
         <Label layoutX="43.0" layoutY="416.0" text="Start energy" />
         <TextField id="startEnergy" layoutX="220.0" layoutY="421.0" />
       <Line endX="135.0" layoutX="426.0" layoutY="699.0" startX="-398.0" />
-      <TextField id="error" fx:id="error" blendMode="SRC_ATOP" editable="false" layoutX="29.0" layoutY="747.0" prefHeight="26.0" prefWidth="534.0" promptText="No warnings" />
+      <TextField id="error" fx:id="error" blendMode="SRC_ATOP" editable="false" layoutX="36.0" layoutY="793.0" prefHeight="26.0" prefWidth="534.0" promptText="No warnings" />
+      <Label layoutX="31.0" layoutY="722.0" text="Day durance (in s)" />
+      <TextField id="dayDurance" layoutX="221.0" layoutY="718.0" />
     </children>
 </AnchorPane>

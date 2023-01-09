@@ -17,9 +17,11 @@ public class Animal extends AbstractMapElement {
     private int age;
     private int kidsQuantity;
     private int energy;
+    private int eatenGrassQuantity;
     private LinkedList<PositionChangeObserver> observersList = new LinkedList<PositionChangeObserver>();
     private LinkedList<DeathObserver> deathObservers = new LinkedList<DeathObserver>();
     private final AbstractWordMap map;
+    private boolean alive = true;
 
     public void addObserver(PositionChangeObserver observer) {
         observersList.add(observer);
@@ -45,6 +47,10 @@ public class Animal extends AbstractMapElement {
         return age;
     }
 
+    public int getEatenGrassQuantity() {
+        return eatenGrassQuantity;
+    }
+
     public Animal(Vector2d startPosition, int startEnergy, GeneSequence genome, AbstractWordMap map) {
         position = startPosition;
         currentRotation = Rotation.encryptGene(new Random().nextInt(Rotation.numberOfGenes()));
@@ -56,8 +62,11 @@ public class Animal extends AbstractMapElement {
         this.map = map;
     }
 
-    public void addEnergy(int energyBoost) {
-        energy += energyBoost;
+    public void eatGrass(int energyBoost) {
+        if(alive){
+            energy += energyBoost;
+            eatenGrassQuantity += 1;
+        }
     }
 
     public void addChild() {
@@ -66,7 +75,7 @@ public class Animal extends AbstractMapElement {
 
     public void loseEnergy(int energyLoss) {
         energy -= energyLoss;
-        if (energy <= 0) {
+        if (energy <= 0 && alive) {
             die();
         }
     }
@@ -79,6 +88,7 @@ public class Animal extends AbstractMapElement {
         for (DeathObserver observer : deathObservers) {
             observer.animalDied(this);
         }
+        alive = false;
     }
 
     public boolean ableToProcreate(int energyToProcreate) {
@@ -92,6 +102,7 @@ public class Animal extends AbstractMapElement {
         } else {
             map.animalCrossesBoundaries(this, newPosition);
         }
+        genome.nextGene();
     }
 
     public void rotate(Rotation rotation) {
@@ -111,5 +122,9 @@ public class Animal extends AbstractMapElement {
 
     public Rotation getCurrentRotation() {
         return currentRotation;
+    }
+
+    public boolean isAlive(){
+        return alive;
     }
 }

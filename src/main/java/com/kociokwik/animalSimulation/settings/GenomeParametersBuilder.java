@@ -13,17 +13,20 @@ public class GenomeParametersBuilder {
         if (genomeLength == null || genomeLength < 0) {
             throw new WrongParameterException("Length of geome");
         }
-        if (behaviourPercent == null || behaviourPercent < 0) {
+        if (behaviourPercent == null || behaviourPercent < 0 || behaviourPercent > 100) {
             throw new WrongParameterException("Behaviour");
         }
         if (mutationType == null) {
             throw new WrongParameterException("Mutation type");
         }
-        if (minPossibleMutationsNumber == null || minPossibleMutationsNumber < 0) {
+        if (minPossibleMutationsNumber == null || minPossibleMutationsNumber < 0 ) {
             throw new WrongParameterException("Minimal mutation quantity");
         }
-        if (maxPossibleMutationsNumber == null || maxPossibleMutationsNumber < 0) {
+        if (maxPossibleMutationsNumber == null || maxPossibleMutationsNumber < 0 || maxPossibleMutationsNumber > genomeLength ) {
             throw new WrongParameterException("Maximum mutation quantity");
+        }
+        if (minPossibleMutationsNumber > maxPossibleMutationsNumber) {
+            throw new WrongParameterException("Minimal and maximum mutation quantity");
         }
         return new GenomeParameters(genomeLength, behaviourPercent, mutationType, minPossibleMutationsNumber, maxPossibleMutationsNumber);
     }

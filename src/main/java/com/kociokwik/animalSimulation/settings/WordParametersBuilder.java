@@ -16,12 +16,13 @@ public class WordParametersBuilder {
     public Integer energyLostWhileProcreation;
     public Integer energyLossPerMove;
     public Integer energyFromGrass;
+    public Integer dayDurance;
 
     public WorldParameters build() {
-        if (width == null || width < 0) {
+        if (width == null || width <= 0) {
             throw new WrongParameterException("width");
         }
-        if (height == null || height < 0) {
+        if (height == null || height <= 0) {
             throw new WrongParameterException("height");
         }
         if (mapType == null) {
@@ -51,7 +52,10 @@ public class WordParametersBuilder {
         if (energyFromGrass == null || energyFromGrass < 0) {
             throw new WrongParameterException("energyFromGrass");
         }
-        return new WorldParameters(width, height, mapType, startQuantityOfAnimals, startQuantityOfGrass, quantityGrassPerDay, grassfiledType, startEnergy, energyFullStomach, energyLostWhileProcreation, energyLossPerMove, energyFromGrass);
+        if(dayDurance == null){
+            throw new WrongParameterException("day durance");
+        }
+        return new WorldParameters(width, height, mapType, startQuantityOfAnimals, startQuantityOfGrass, quantityGrassPerDay, grassfiledType, startEnergy, energyFullStomach, energyLostWhileProcreation, energyLossPerMove, energyFromGrass, dayDurance);
     }
 
     public WordParametersBuilder setWidth(Integer width) {
@@ -111,6 +115,11 @@ public class WordParametersBuilder {
 
     public WordParametersBuilder setEnergyFromGrass(Integer energyFromGrass) {
         this.energyFromGrass = energyFromGrass;
+        return this;
+    }
+
+    public WordParametersBuilder setDayDurance(Integer dayDurance){
+        this.dayDurance = dayDurance;
         return this;
     }
 }
