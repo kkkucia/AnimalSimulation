@@ -29,11 +29,6 @@ public class Animal extends AbstractMapElement {
         deathObservers.add(observer);
     }
 
-//    void removeObservers(com.kociokwik.animalSimulation.settings.PositionChangeObserver observer, com.kociokwik.animalSimulation.settings.DeathObserver deathObserver) {
-//        observersList.remove(observer);
-//        deathObservers.remove(deathObserver));
-//    }
-
     public GeneSequence getGenome() {
         return genome;
     }

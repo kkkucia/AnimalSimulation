@@ -5,19 +5,24 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.TextArea?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <GridPane id="grid" gridLinesVisible="true" layoutY="59.0" prefHeight="341.0" prefWidth="600.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-      <Label id="test" layoutX="59.0" layoutY="14.0" prefHeight="31.0" prefWidth="303.0" />
-   </children>
+<?import javafx.scene.control.Button?>
+<AnchorPane prefHeight="526.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane id="grid" gridLinesVisible="true" layoutY="59.0" prefHeight="465.0" prefWidth="473.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
+        <Label id="test" layoutX="59.0" layoutY="14.0" prefHeight="31.0" prefWidth="303.0" />
+        <Button id="resume" layoutX="504.0" layoutY="59.0" mnemonicParsing="false" text="Resume" />
+        <Button id="pause" layoutX="632.0" layoutY="59.0" mnemonicParsing="false" text="Pause" />
+        <Button id="stop" layoutX="542.0" layoutY="17.0" mnemonicParsing="false" text="Stop simulation" />
+        <TextArea id = "stats" layoutX="491.0" layoutY="91.0" prefHeight="413.0" prefWidth="200.0" />
+    </children>
 </AnchorPane>

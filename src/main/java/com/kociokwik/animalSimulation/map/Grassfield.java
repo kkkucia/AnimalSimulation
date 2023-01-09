@@ -18,7 +18,6 @@ abstract public class Grassfield implements WorldGrassfiled {
 
     protected Map<Vector2d, Grass> grassesOnMap = new HashMap<>();
     protected Map<Vector2d, Integer> grassesMapPercent = new HashMap<>();
-
     protected ArrayList<Vector2d> lotteryCoordinates = new ArrayList<>();
 
     public Grassfield(WorldParameters worldParams) {
@@ -36,6 +35,7 @@ abstract public class Grassfield implements WorldGrassfiled {
 
     public void removeGrass(Vector2d position) {
         grassesOnMap.remove(position);
+        lotteryCoordinates.add(position);
     }
 
     @Override
@@ -43,7 +43,6 @@ abstract public class Grassfield implements WorldGrassfiled {
         List<Vector2d> currentGrassCoordinates = grassCoordinates(quantityOfGrass);
         for (Vector2d field : currentGrassCoordinates) {
             grassesOnMap.put(field, new Grass(field));
-            //lotteryCoordinates.remove(field);
         }
     }
 

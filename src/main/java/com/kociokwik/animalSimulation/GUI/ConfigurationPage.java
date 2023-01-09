@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -53,6 +54,7 @@ public class ConfigurationPage {
         Scene scene = new Scene(root);
         String simulationCss = this.getClass().getClassLoader().getResource("styleSimulation.css").toExternalForm();
         scene.getStylesheets().add(simulationCss);
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
         controller.run();

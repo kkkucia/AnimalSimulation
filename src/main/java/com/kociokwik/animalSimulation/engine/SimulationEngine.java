@@ -13,6 +13,9 @@ import java.util.*;
 public class SimulationEngine implements Simulation, DeathObserver {
 
     private List<Animal> animalCorpses;
+    private int sumAgeOfDeaths = 0;
+    private int countOfDeaths = 0;
+    private int countOfBirths = 0;
     private final AbstractWordMap map;
 
     private final Grassfield grassfield;
@@ -34,11 +37,16 @@ public class SimulationEngine implements Simulation, DeathObserver {
         return map;
     }
 
+    public WorldParameters getWorldParams() {
+        return worldParams;
+    }
+
     private void addAnimalsToMap() {
         for (int i = 0; i < worldParams.startQuantityOfAnimals; i++) {
             Vector2d startPosition = new Vector2d(new Random().nextInt(worldParams.width), new Random().nextInt(worldParams.height));
             Animal animal = new Animal(startPosition, worldParams.startEnergy, new GeneSequence(genomeParams), map);
             addAnimalToMap(animal);
+            countOfBirths ++;
         }
     }
 
@@ -58,6 +66,11 @@ public class SimulationEngine implements Simulation, DeathObserver {
                 }
             }
         }
+    }
+
+    public void addDeath(Animal animal){
+        countOfDeaths += 1;
+        sumAgeOfDeaths+= animal.getAge();
     }
 
     @Override
@@ -117,6 +130,7 @@ public class SimulationEngine implements Simulation, DeathObserver {
                 if (sortedAnimals.length >= 2) {
                     if (sortedAnimals[1].ableToProcreate(worldParams.energyFullStomach)) {
                         animalBirth(sortedAnimals[0], sortedAnimals[1]);
+                        countOfBirths ++;
                         sortedAnimals[0].addChild();
                         sortedAnimals[1].addChild();
                         sortedAnimals[0].loseEnergy(worldParams.energyLostWhileProcreation);
@@ -163,5 +177,20 @@ public class SimulationEngine implements Simulation, DeathObserver {
 
     public Grassfield getGrassfield() {
         return grassfield;
+    }
+
+    public double getAverageAnimalAgeWhenDied(){
+        if(countOfDeaths == 0){
+            return 0;
+        }
+        return sumAgeOfDeaths/(double) countOfDeaths;
+    }
+
+    public int getCountOfDeads(){
+        return countOfDeaths;
+    }
+
+    public int getQuantityOfAnimalsOnMap(){
+        return countOfBirths - countOfDeaths;
     }
 }
