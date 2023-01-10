@@ -1,0 +1,19 @@
+genomeLength: 10
+behaviourPercent: 100
+mutationType: strict
+minPossibleMutationsNumber: 0
+maxPossibleMutationsNumber: 4
+width: 16
+height: 12
+mapType: EarthMap
+startQuantityOfAnimals: 10
+startQuantityOfGrass: 5
+quantityGrassPerDay: 2
+grassfiledType: Forested equators
+startEnergy: 10
+energyFullStomach: 3
+energyLostWhileProcreation: 2
+energyLossPerMove: 1
+energyFromGrass: 3
+dayDurance: 2
+wantCsv: No

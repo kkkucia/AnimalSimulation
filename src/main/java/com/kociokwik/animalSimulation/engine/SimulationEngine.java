@@ -9,7 +9,6 @@ import com.kociokwik.animalSimulation.settings.DeathObserver;
 import com.kociokwik.animalSimulation.settings.Vector2d;
 import com.kociokwik.animalSimulation.settings.WorldParameters;
 
-
 import java.util.*;
 
 public class SimulationEngine implements Simulation, DeathObserver {
@@ -21,7 +20,6 @@ public class SimulationEngine implements Simulation, DeathObserver {
     private int countOfKids = 0;
     private int[] genomeStatistics = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
     private final AbstractWordMap map;
-
     private final Grassfield grassfield;
     private final WorldParameters worldParams;
     private final GenomeParameters genomeParams;
@@ -193,7 +191,6 @@ public class SimulationEngine implements Simulation, DeathObserver {
         if (liveAnimals == 0) {
             return 0;
         }
-
         return countOfKids / (double) liveAnimals;
     }
 
@@ -201,7 +198,6 @@ public class SimulationEngine implements Simulation, DeathObserver {
         for (Rotation gene : genome) {
             genomeStatistics[gene.geneValue()]++;
         }
-
     }
 
     public Rotation dominateGene() {

@@ -21,23 +21,23 @@ AnchorPane {
             #EECDA3 0%,
             #EF629F 50%
     );
-    -fx-background-image: url('images/bcg.png');
+    -fx-background-image: url('../images/bcg.png');
 }
 
-TextField{
+TextField {
     -fx-font-family: "Lucida Handwriting";
     -fx-text-fill: white;
     -fx-text-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
     -fx-font-size: 20px;
-     -fx-background-color: "transparent"
+    -fx-background-color: "transparent"
 }
 
-Button{
+Button {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
     -fx-background-color: black;
     -fx-text-fill: white;
 }
 
-#error{
+#error {
     -fx-text-fill: red;
 }

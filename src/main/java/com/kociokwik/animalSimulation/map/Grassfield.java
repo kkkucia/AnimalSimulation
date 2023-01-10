@@ -74,11 +74,11 @@ abstract public class Grassfield implements WorldGrassfiled {
 
     private int findLotteryRange() {
         int lotteryRange = 0;
-        for (int i = 0; i < lotteryCoordinates.size(); i++) {
-            lotteryRange += grassesMapPercent.get(lotteryCoordinates.get(i));
+
+        for (Vector2d lotteryCoordinate : lotteryCoordinates) {
+            lotteryRange += grassesMapPercent.get(lotteryCoordinate);
         }
         return lotteryRange;
     }
-
 }
 

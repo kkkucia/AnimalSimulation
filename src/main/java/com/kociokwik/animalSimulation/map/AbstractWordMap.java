@@ -62,26 +62,9 @@ abstract public class AbstractWordMap implements WorldMap, PositionChangeObserve
     }
 
     @Override
-    public Object objectAt(Vector2d position) {
-        if (!animalsOnMap[position.y()][position.x()].isEmpty() && !grassfield.grassesOnMap.containsKey(position)) {
-            return animalsOnMap[position.y()][position.x()].get(0);
-        }
-        return null;
-    }
-
-    @Override
     public void animalMoved(Animal animal, Vector2d oldPosition, Vector2d newPosition) {
         animalsOnMap[oldPosition.y()][oldPosition.x()].remove(animal);
         animalsOnMap[newPosition.y()][newPosition.x()].add(animal);
     }
 
-    @Override
-    public boolean isOccupied(Vector2d position) {
-        return objectAt(position) != null;
-    }
-
-    @Override
-    public String toString() {
-        return new MapVisualiser(this).draw(bottomLeftCorner, topRightCorner);
-    }
 }

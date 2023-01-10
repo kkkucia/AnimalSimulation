@@ -4,9 +4,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kociokwik.animalSimulation.GUI.WelcomePage">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.kociokwik.animalSimulation.GUI.WelcomePage">
     <children>
-        <Button id="start" contentDisplay="CENTER" layoutX="248.0" layoutY="305.0" mnemonicParsing="false" onAction="#startSettingParams" text="Let's get started!" />
-        <TextField id="h1" alignment="CENTER" layoutX="100.0" layoutY="92.0" prefHeight="25.0" prefWidth="400" text="Welcome to Cat Survival Fighting Simulation" />
+        <Button id="start" contentDisplay="CENTER" layoutX="248.0" layoutY="305.0" mnemonicParsing="false"
+                onAction="#startSettingParams" text="Let's get started!"/>
+        <TextField id="h1" alignment="CENTER" layoutX="100.0" layoutY="92.0" prefHeight="25.0" prefWidth="400"
+                   text="Welcome to Cat Survival Fighting Simulation"/>
     </children>
 </AnchorPane>

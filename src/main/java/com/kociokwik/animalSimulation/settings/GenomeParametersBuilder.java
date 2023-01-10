@@ -19,10 +19,10 @@ public class GenomeParametersBuilder {
         if (mutationType == null) {
             throw new WrongParameterException("Mutation type");
         }
-        if (minPossibleMutationsNumber == null || minPossibleMutationsNumber < 0 ) {
+        if (minPossibleMutationsNumber == null || minPossibleMutationsNumber < 0) {
             throw new WrongParameterException("Minimal mutation quantity");
         }
-        if (maxPossibleMutationsNumber == null || maxPossibleMutationsNumber < 0 || maxPossibleMutationsNumber > genomeLength ) {
+        if (maxPossibleMutationsNumber == null || maxPossibleMutationsNumber < 0 || maxPossibleMutationsNumber > genomeLength) {
             throw new WrongParameterException("Maximum mutation quantity");
         }
         if (minPossibleMutationsNumber > maxPossibleMutationsNumber) {

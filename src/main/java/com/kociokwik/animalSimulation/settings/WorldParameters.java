@@ -16,9 +16,12 @@ public class WorldParameters {
     public int energyLostWhileProcreation;
     public int energyLossPerMove;
     public int energyFromGrass;
-    public int dayDurance;
+    public float dayDurance;
+    public boolean wantCsv;
 
-    public WorldParameters(int width, int height, MapType mapType, int startQuantityOfAnimals, int startQuantityOfGrass, int quantityGrassPerDay, GrassfieldType grassfiledType, int startEnergy, int energyFullStomach, int energyLostWhileProcreation, int energyLossPerMove, int energyFromGrass, int dayDurance) {
+    public WorldParameters(int width, int height, MapType mapType, int startQuantityOfAnimals, int startQuantityOfGrass,
+                           int quantityGrassPerDay, GrassfieldType grassfiledType, int startEnergy, int energyFullStomach,
+                           int energyLostWhileProcreation, int energyLossPerMove, int energyFromGrass, float dayDurance, boolean wantCsv) {
         this.width = width;
         this.height = height;
         this.mapType = mapType;
@@ -32,5 +35,6 @@ public class WorldParameters {
         this.energyLossPerMove = energyLossPerMove;
         this.energyFromGrass = energyFromGrass;
         this.dayDurance = dayDurance;
+        this.wantCsv = wantCsv;
     }
 }

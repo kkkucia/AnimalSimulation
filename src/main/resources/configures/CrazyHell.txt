@@ -1,0 +1,19 @@
+genomeLength: 20
+behaviourPercent: 20
+mutationType: lottery
+minPossibleMutationsNumber: 10
+maxPossibleMutationsNumber: 20
+width: 20
+height: 20
+mapType:HellMap
+startQuantityOfAnimals:20
+startQuantityOfGrass: 0
+quantityGrassPerDay:5
+grassfiledType: Toxic corpses
+startEnergy: 20
+energyFullStomach: 5
+energyLostWhileProcreation: 2
+energyLossPerMove: 1
+energyFromGrass: 5
+dayDurance: 2
+wantCsv: No

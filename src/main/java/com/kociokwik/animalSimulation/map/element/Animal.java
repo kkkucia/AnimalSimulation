@@ -63,7 +63,7 @@ public class Animal extends AbstractMapElement {
     }
 
     public void eatGrass(int energyBoost) {
-        if(alive){
+        if (alive) {
             energy += energyBoost;
             eatenGrassQuantity += 1;
         }
@@ -124,7 +124,7 @@ public class Animal extends AbstractMapElement {
         return currentRotation;
     }
 
-    public boolean isAlive(){
+    public boolean isAlive() {
         return alive;
     }
 }

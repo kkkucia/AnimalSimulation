@@ -24,7 +24,7 @@ public class ElementBox {
         imageView.setFitHeight(size);
         this.fullEnergy = fullEnergy;
 
-        if (element instanceof Animal) {
+        if (element.getZIndex() == 1) {
             Label label = new Label((element.getPosition().toString()));
 
             label.setStyle(lifeBarColor(((Animal) element).getEnergy()));
@@ -34,10 +34,6 @@ public class ElementBox {
             verticalBox.getChildren().add(imageView);
         }
         verticalBox.setAlignment(Pos.CENTER);
-    }
-
-    public VBox getVerticalBox() {
-        return verticalBox;
     }
 
     private String lifeBarColor(int energy) {
@@ -55,5 +51,9 @@ public class ElementBox {
             color = "-fx-text-fill: #000000; -fx-background-color:  #ff044f";
         }
         return color;
+    }
+
+    public VBox getVerticalBox() {
+        return verticalBox;
     }
 }

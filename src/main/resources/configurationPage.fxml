@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -74,12 +75,20 @@
         <Line endX="135.0" layoutX="434.0" layoutY="260.0" startX="-398.0" />
         <Line endX="135.0" layoutX="425.0" layoutY="452.0" startX="-398.0" />
         <Button id="start" contentDisplay="CENTER" layoutX="237.0" layoutY="754.0" mnemonicParsing="false" onAction="#createAndStartSimulation" text="START SIMULATION!" />
-        <TextField alignment="CENTER" layoutX="205.0" layoutY="2.0" prefHeight="25.0" prefWidth="190.0" text="SET SIMULATION PARAMETERS!" />
+        <TextField alignment="CENTER" layoutX="134.0" layoutY="2.0" prefHeight="25.0" prefWidth="362.0" text="SET SIMULATION PARAMETERS or SELECT CONFIGURATION" />
         <Label layoutX="43.0" layoutY="416.0" text="Start energy" />
         <TextField id="startEnergy" layoutX="220.0" layoutY="421.0" />
-      <Line endX="135.0" layoutX="426.0" layoutY="699.0" startX="-398.0" />
-      <TextField id="error" fx:id="error" blendMode="SRC_ATOP" editable="false" layoutX="36.0" layoutY="793.0" prefHeight="26.0" prefWidth="534.0" promptText="No warnings" />
-      <Label layoutX="31.0" layoutY="722.0" text="Day durance (in s)" />
-      <TextField id="dayDurance" layoutX="221.0" layoutY="718.0" />
+        <Line endX="135.0" layoutX="426.0" layoutY="699.0" startX="-398.0" />
+        <TextField id="error" fx:id="error" blendMode="SRC_ATOP" editable="false" layoutX="36.0" layoutY="793.0" prefHeight="26.0" prefWidth="534.0" promptText="No warnings" />
+        <Label layoutX="31.0" layoutY="722.0" text="Day durance (in s)" />
+        <TextField id="dayDurance" layoutX="221.0" layoutY="718.0" />
+        <Label layoutX="420.0" layoutY="722.0" prefHeight="17.0" prefWidth="113.0" text="Statistic csv file:" />
+        <RadioButton layoutX="421.0" layoutY="746.0" mnemonicParsing="false" onAction="#wantCsvAction" prefHeight="17.0" prefWidth="97.0" text="Yes, I want">
+            <toggleGroup>
+                <ToggleGroup fx:id="wantCsv" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton layoutX="421.0" layoutY="771.0" mnemonicParsing="false" onAction="#wantCsvAction" prefHeight="17.0" prefWidth="91.0" selected="true" text="No, Thanks" toggleGroup="$wantCsv" />
+        <ComboBox id="fileToOpen" layoutX="389.0" layoutY="64.0" prefHeight="25.0" prefWidth="182.0" promptText="SELECT CONFIGURATION" />
     </children>
 </AnchorPane>

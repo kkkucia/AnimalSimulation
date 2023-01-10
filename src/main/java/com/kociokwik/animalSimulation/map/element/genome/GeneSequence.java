@@ -78,7 +78,6 @@ public class GeneSequence {
             Rotation[] newSeq = mixedSequenceStrict(newSequence);
             return new GeneSequence(newSeq, params);
         }
-
         return new GeneSequence(mixedSequenceLottery(newSequence), params);
     }
 

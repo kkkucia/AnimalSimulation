@@ -8,7 +8,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    String css = this.getClass().getClassLoader().getResource("style.css").toExternalForm();
+    String css = this.getClass().getClassLoader().getResource("styles/style.css").toExternalForm();
 
     @Override
     public void start(Stage primaryStage) throws Exception {

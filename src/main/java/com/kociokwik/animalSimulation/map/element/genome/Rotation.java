@@ -70,7 +70,7 @@ public enum Rotation {
         };
     }
 
-    public double rotationValue(){
+    public double rotationValue() {
         return switch (this) {
             case Rotation0 -> 0;
             case Rotation45 -> 45;

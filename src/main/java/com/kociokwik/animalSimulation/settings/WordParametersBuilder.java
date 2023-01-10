@@ -16,7 +16,9 @@ public class WordParametersBuilder {
     public Integer energyLostWhileProcreation;
     public Integer energyLossPerMove;
     public Integer energyFromGrass;
-    public Integer dayDurance;
+    public Float dayDurance;
+
+    public boolean wantCsv;
 
     public WorldParameters build() {
         if (width == null || width <= 0) {
@@ -52,10 +54,11 @@ public class WordParametersBuilder {
         if (energyFromGrass == null || energyFromGrass < 0) {
             throw new WrongParameterException("energyFromGrass");
         }
-        if(dayDurance == null){
+        if (dayDurance == null) {
             throw new WrongParameterException("day durance");
         }
-        return new WorldParameters(width, height, mapType, startQuantityOfAnimals, startQuantityOfGrass, quantityGrassPerDay, grassfiledType, startEnergy, energyFullStomach, energyLostWhileProcreation, energyLossPerMove, energyFromGrass, dayDurance);
+        return new WorldParameters(width, height, mapType, startQuantityOfAnimals, startQuantityOfGrass, quantityGrassPerDay,
+                grassfiledType, startEnergy, energyFullStomach, energyLostWhileProcreation, energyLossPerMove, energyFromGrass, dayDurance, wantCsv);
     }
 
     public WordParametersBuilder setWidth(Integer width) {
@@ -98,7 +101,7 @@ public class WordParametersBuilder {
         return this;
     }
 
-    public WordParametersBuilder setEnergyFullStomach(Integer  energyFullStomach) {
+    public WordParametersBuilder setEnergyFullStomach(Integer energyFullStomach) {
         this.energyFullStomach = energyFullStomach;
         return this;
     }
@@ -118,8 +121,13 @@ public class WordParametersBuilder {
         return this;
     }
 
-    public WordParametersBuilder setDayDurance(Integer dayDurance){
+    public WordParametersBuilder setDayDurance(Float dayDurance) {
         this.dayDurance = dayDurance;
+        return this;
+    }
+
+    public WordParametersBuilder setWantCsv(Boolean wantCsv) {
+        this.wantCsv = wantCsv;
         return this;
     }
 }

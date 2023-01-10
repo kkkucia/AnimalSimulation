@@ -8,3 +8,12 @@
     -fx-font-family: "Lofty";
     -fx-color-label-visible: white;
 }
+
+.animalsGrid {
+    -fx-background-color: linear-gradient(
+            from 0% 0% to 100% 200%,
+            repeat,
+            rgba(227, 227, 227, 0.97) 0%,
+            rgba(180, 180, 180, 1) 50%
+    );
+}
