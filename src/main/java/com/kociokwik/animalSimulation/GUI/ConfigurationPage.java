@@ -25,13 +25,13 @@ import java.util.HashMap;
 
 
 public class ConfigurationPage {
-    WorldParameters worldParameters;
-    GenomeParameters genomeParameters;
-    GrassfieldType grassfieldType = GrassfieldType.ForestedEquators;
-    MutationType mutationType = MutationType.Strict;
-    MapType mapType = MapType.EarthMap;
-    Boolean wantCsv = false;
-    int behaviour = 100;
+    private WorldParameters worldParameters;
+    private GenomeParameters genomeParameters;
+    private GrassfieldType grassfieldType = GrassfieldType.ForestedEquators;
+    private MutationType mutationType = MutationType.Strict;
+    private MapType mapType = MapType.EarthMap;
+    private Boolean wantCsv = false;
+    private int behaviour = 100;
     private final int STAGE_WIDTH = 1500;
     private final int STAGE_HEIGHT = 750;
 

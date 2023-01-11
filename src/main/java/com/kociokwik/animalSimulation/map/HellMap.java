@@ -7,6 +7,7 @@ import com.kociokwik.animalSimulation.settings.WorldParameters;
 import java.util.Random;
 
 public class HellMap extends AbstractWordMap {
+
     public HellMap(WorldParameters worldParams, Grassfield grassfield) {
         super(worldParams, grassfield);
     }

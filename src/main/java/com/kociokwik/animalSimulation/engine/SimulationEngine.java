@@ -23,7 +23,7 @@ public class SimulationEngine implements Simulation, DeathObserver {
     private final Grassfield grassfield;
     private final WorldParameters worldParams;
     private final GenomeParameters genomeParams;
-    private final int ENERGY_LOST_PER_DAY = 1;
+    public final int ENERGY_LOST_PER_DAY = 1;
 
     public SimulationEngine(WorldParameters worldParams, GenomeParameters genomeParams) {
         this.worldParams = worldParams;

@@ -24,7 +24,6 @@ public class CsvWriter {
     private static final String NEW_LINE_WINDOWS = "\r\n";
     private static List<String[]> list = new ArrayList<>();
 
-
     public CsvWriter() {
         String[] header = {"Day", "Animal quantity", "Grass quantity", "Dead animals quantity", "Average age of deaths",
                 "Average energy", "Average quantity of kids", "Free fileds", "Dominant gene"};

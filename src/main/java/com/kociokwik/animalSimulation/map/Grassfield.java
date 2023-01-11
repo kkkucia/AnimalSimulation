@@ -7,7 +7,6 @@ import com.kociokwik.animalSimulation.settings.WorldParameters;
 import java.util.*;
 
 abstract public class Grassfield implements WorldGrassfiled {
-
     protected final Vector2d topRightCorner;
     protected final Vector2d bottomLeftCorner;
     protected final WorldParameters worldParams;
@@ -30,7 +29,6 @@ abstract public class Grassfield implements WorldGrassfiled {
                 lotteryCoordinates.add(new Vector2d(x, y));
             }
         }
-        System.out.println(lotteryCoordinates.size());
     }
 
     public void removeGrass(Vector2d position) {

@@ -26,17 +26,16 @@ import java.util.List;
 import java.util.Map;
 
 public class SimulationPage implements Runnable {
-    SingleSimulation simulation;
-    Stage stage;
+    private final SingleSimulation simulation;
+    private final Stage stage;
     private GridPane grid;
-    final int IMG_SIZE = 32;
-    final int SIZE = 52;
-
+    public final int IMG_SIZE = 32;
+    public final int SIZE = 52;
     private int i = 0;
-    Timeline timeline = null;
-    Animal animalToPrint = null;
+    private Timeline timeline = null;
+    private Animal animalToPrint = null;
     private List<VBox> domainGenomeAnimals = new LinkedList<VBox>();
-    CsvWriter writer;
+    private CsvWriter writer;
 
     public SimulationPage(SingleSimulation simulation, Stage stage) {
         this.simulation = simulation;
@@ -116,7 +115,7 @@ public class SimulationPage implements Runnable {
         }
     }
 
-    public void pauseAndUnpauseApp() {
+    private void pauseAndUnpauseApp() {
         if (timeline.getStatus() == Animation.Status.RUNNING) {
             timeline.pause();
             for (VBox element : domainGenomeAnimals) {
@@ -134,7 +133,7 @@ public class SimulationPage implements Runnable {
         }
     }
 
-    public void stopSimulation() {
+    private void stopSimulation() {
         timeline.stop();
         (stage.getScene().lookup("#pause")).setVisible(false);
         if (simulation.getSimulationEngine().getWorldParams().wantCsv) {

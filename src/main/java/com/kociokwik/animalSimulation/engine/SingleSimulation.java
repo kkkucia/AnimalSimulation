@@ -2,7 +2,7 @@ package com.kociokwik.animalSimulation.engine;
 
 
 public class SingleSimulation {
-    SimulationEngine simulationEngine;
+    private final SimulationEngine simulationEngine;
 
     public SingleSimulation(SimulationEngine simulationEngine) {
         this.simulationEngine = simulationEngine;

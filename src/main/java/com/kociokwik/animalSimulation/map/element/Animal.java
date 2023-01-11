@@ -12,7 +12,6 @@ import java.util.Random;
 
 public class Animal extends AbstractMapElement {
     private final GeneSequence genome;
-
     private Rotation currentRotation;
     private int age;
     private int kidsQuantity;
@@ -22,34 +21,6 @@ public class Animal extends AbstractMapElement {
     private LinkedList<DeathObserver> deathObservers = new LinkedList<DeathObserver>();
     private final AbstractWordMap map;
     private boolean alive = true;
-
-    public void addObserver(PositionChangeObserver observer) {
-        observersList.add(observer);
-    }
-
-    public void addDeathObserver(DeathObserver observer) {
-        deathObservers.add(observer);
-    }
-
-    public GeneSequence getGenome() {
-        return genome;
-    }
-
-    public int getEnergy() {
-        return energy;
-    }
-
-    public int getKidsQuantity() {
-        return kidsQuantity;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public int getEatenGrassQuantity() {
-        return eatenGrassQuantity;
-    }
 
     public Animal(Vector2d startPosition, int startEnergy, GeneSequence genome, AbstractWordMap map) {
         position = startPosition;
@@ -84,7 +55,7 @@ public class Animal extends AbstractMapElement {
         age += 1;
     }
 
-    public void die() {
+    private void die() {
         for (DeathObserver observer : deathObservers) {
             observer.animalDied(this);
         }
@@ -109,6 +80,18 @@ public class Animal extends AbstractMapElement {
         currentRotation = Rotation.encryptGene((currentRotation.geneValue() + rotation.geneValue()) % Rotation.numberOfGenes());
     }
 
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void addObserver(PositionChangeObserver observer) {
+        observersList.add(observer);
+    }
+
+    public void addDeathObserver(DeathObserver observer) {
+        deathObservers.add(observer);
+    }
+
     @Override
     public String toString() {
         return currentRotation.toString();
@@ -119,12 +102,27 @@ public class Animal extends AbstractMapElement {
         return "src/main/resources/images/cat.png";
     }
 
-
     public Rotation getCurrentRotation() {
         return currentRotation;
     }
 
-    public boolean isAlive() {
-        return alive;
+    public GeneSequence getGenome() {
+        return genome;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public int getKidsQuantity() {
+        return kidsQuantity;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getEatenGrassQuantity() {
+        return eatenGrassQuantity;
     }
 }
